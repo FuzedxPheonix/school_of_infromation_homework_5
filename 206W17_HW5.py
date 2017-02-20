@@ -35,10 +35,8 @@ from config import consumer_key, consumer_secret, access_token, access_token_sec
 ## **** If you choose not to do that, we strongly advise using authentication information for an 'extra' Twitter account you make just for this class, and not your personal account, because it's not ideal to share your authentication information for a real account that you use frequently.
 
 ## Get your secret values to authenticate to Twitter. You may replace each of these with variables rather than filling in the empty strings if you choose to do the secure way for 50 EC points
-# consumer_key = "Q1J6Twy9FEtzc1B4ben6BRG9V" 
-# consumer_secret = "JzpYFORsgAAZmb3KV6cYIWfklNK4X8bQ2CcvcwEvNSHPY16AmY"
-# access_token = "2396302082-jeEbWEPjSG6UNCfGJNfnYsIJUUv8CP5TFpzZjpi"
-# access_token_secret = "0MuT7S9IAFdsl2cRpwdSxrJza3nyunjV0AjvvaGdNxtZd"
+
+
 ## Set up your authentication to Twitter
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
