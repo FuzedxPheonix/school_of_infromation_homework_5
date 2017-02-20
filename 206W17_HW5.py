@@ -2,7 +2,7 @@ import unittest
 import tweepy
 import requests
 import json
-
+from config import consumer_key, consumer_secret, access_token, access_token_secret
 ## SI 206 - W17 - HW5
 ## COMMENT WITH:
 ## Your section day/time:
@@ -35,16 +35,53 @@ import json
 ## **** If you choose not to do that, we strongly advise using authentication information for an 'extra' Twitter account you make just for this class, and not your personal account, because it's not ideal to share your authentication information for a real account that you use frequently.
 
 ## Get your secret values to authenticate to Twitter. You may replace each of these with variables rather than filling in the empty strings if you choose to do the secure way for 50 EC points
-consumer_key = "Q1J6Twy9FEtzc1B4ben6BRG9V" 
-consumer_secret = "JzpYFORsgAAZmb3KV6cYIWfklNK4X8bQ2CcvcwEvNSHPY16AmY"
-access_token = "2396302082-jeEbWEPjSG6UNCfGJNfnYsIJUUv8CP5TFpzZjpi"
-access_token_secret = "0MuT7S9IAFdsl2cRpwdSxrJza3nyunjV0AjvvaGdNxtZd"
+# consumer_key = "Q1J6Twy9FEtzc1B4ben6BRG9V" 
+# consumer_secret = "JzpYFORsgAAZmb3KV6cYIWfklNK4X8bQ2CcvcwEvNSHPY16AmY"
+# access_token = "2396302082-jeEbWEPjSG6UNCfGJNfnYsIJUUv8CP5TFpzZjpi"
+# access_token_secret = "0MuT7S9IAFdsl2cRpwdSxrJza3nyunjV0AjvvaGdNxtZd"
 ## Set up your authentication to Twitter
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
-api = tweepy.API(auth, parser=tweepy.parsers.JSONParser()) # Set up library to grab stuff from twitter with your authentication, and return it in a JSON-formatted way
+api = tweepy.API(auth) # Set up library to grab stuff from twitter with your authentication, and return it in a JSON-formatted way
+
+
 
 ## Write the rest of your code here!
+
+query = input("What are searching for\n")
+
+searched_tweets = api.search(q=query, count = 3, parser=tweepy.parsers.JSONParser())
+
+
+def gets_three_tweets(filestuff):
+	new_file = open(filestuff, 'r')
+
+	cached_data = json.loads(new_file.read())
+
+	for elem in cached_data['statuses']:
+		temp_created_at = elem['created_at']
+		temp_text = elem['text']
+		print("TEXT: " + temp_created_at)
+		print("CREATED AT: " + temp_text)
+
+
+try:
+	# Will always run 
+	with open('data.txt', 'w') as fp:
+	    json.dump(searched_tweets, fp)
+	    fp.close()
+
+	gets_three_tweets("data.txt")
+
+
+except:
+	print("ERROR")
+
+
+
+
+
+ 
 
 
 
